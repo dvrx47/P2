@@ -6,13 +6,20 @@
 #include <stdbool.h>
 #include <semaphore.h>
 #include <stdlib.h>
-#include <assert.h>
 
 //MAX_NAME opisuje ilosc rekordow w tablicy NAME[]
 #define MAX_NAME 200
 #define LIM_UTWOR 100
+#define MAX_ART 1000
 
-enum typ {ARTYSTA, UTWOR};
+
+pthread_mutex_t lock_sklep;
+pthread_mutex_t lock_mgr;
+pthread_mutex_t lock_kolejka;
+
+int nagrane_utwory = 0;
+
+enum typ {ARTYSTA, UTWOR, IMIONA};
 typedef enum typ typListy;
 
 typedef struct elem elem;
@@ -28,7 +35,11 @@ typedef struct lista{
 	elem *last;
 }lista;
 
-
+typedef struct menager{
+	int zapotrzebowanie;
+	int posiadane;
+	lista * utwory; //utwory przyniesione ze sklepu
+} menager;
 
 
 typedef struct art{
@@ -36,6 +47,10 @@ typedef struct art{
 	int  klasa;
 	char *name;
 }art;
+
+typedef struct utwor{
+	lista * imiona;
+} utwor;
 
 //inicjalizacja listy
 lista * initList(typListy l);
@@ -53,10 +68,14 @@ void append(void *in, lista *list);
 /*
 	założenia do funkcji:
 	-obiekt danego typu należy do listy
+	-dziala tylko na liscie typu
+	
+	-musi zwracac imie usunietego artysty jako niezalezny char*
 */
-void usunTyp(int typ, lista *list); 
+char * usunTyp(int typ, lista *list); 
 
-
+//z mysla o listach typu utwor, usuwa pierwszy element z listy
+utwor * delFirst(lista *list);
 
 
 //tablica nazw
