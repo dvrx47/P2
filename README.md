@@ -6,3 +6,5 @@ menager idzie do sklepu (gdyż wszystkie utwory wytwórnia sprzedała i nie posi
 
 Wytwórnia jeśli widzi, że jest n gotowych do grania artystów na liście - zaprasza ich do siebie i wydaje nagranie.
 następnie nagranie jest sprzedawane do sklepu.
+
+Tak jak w pierwszym zadaniu wytwórnia kończy prace po wyprodukowaniu 100 utworów.
