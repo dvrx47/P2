@@ -1,0 +1,1 @@
+Impasu unikam według idei algorytmu bankiera. Tzn. nie dopuszczam żeby doszło do sytuacji gdy ktoś przetrzymuje nieużywane zasoby.
